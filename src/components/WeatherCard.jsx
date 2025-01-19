@@ -1,16 +1,9 @@
 import React from 'react';
 
 class WeatherCard extends React.Component{
-    constructor(props){
-        super(props);
-
-        
-    }
-
     convertToFahrenheit(){
         return this.props.temperature * 2 + 30;
     }
-
 
     render() {
         return (
