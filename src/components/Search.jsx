@@ -8,13 +8,7 @@ class Search extends React.Component{
     }
 
     handleInputChange(event){
-        this.props.setLocation({location: event.target.value});
-    }
-
-    componentDidUpdate(prevProps, prevState){
-        if(prevState.location !== this.state.location){
-            console.log("changed");
-        }
+        this.props.setLocation(event.target.value);
     }
 
     render(){

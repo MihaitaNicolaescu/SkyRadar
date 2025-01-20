@@ -3,13 +3,15 @@ import './App.css'
 import React from "react";
 import WeatherCard from './components/WeatherCard';
 import Search from './components/Search';
+import axios from 'axios';
 
 class App extends React.Component{
 
   
   constructor(props){
     super(props);
-    const API_KEY = "13f6880c923e003b93a6618ec85721f6";
+    this.API_KEY = "";
+    this.debounceTimer = React.createRef();
 
     this.state = {
       location: "",
@@ -21,26 +23,26 @@ class App extends React.Component{
         }
       ]
     }
-
   }
+
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.location != this.state.location){
+      clearTimeout(this.debounceTimer);
+
+      this.debounceTimer = setTimeout(() => {
+        this.fetchData()
+      }, 1500);
+    }
+  }
+
   setLocation = (value) => {
     this.setState({location: value});
   }
 
-  fetchData(location) {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&mode=xml&appid=${this.API_KEY}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Eroare la preluarea datelor");
-        }
-        return response.text();
-      })
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  async fetchData() {
+
+    const response = await axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${this.state.location}?key=${this.API_KEY}`);
+    console.log(response);
   }
 
   render(){
