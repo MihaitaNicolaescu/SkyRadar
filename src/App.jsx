@@ -35,8 +35,13 @@ class App extends React.Component{
   }
 
   async fetchData() {
-    const response = await axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${this.state.location}?key=${this.API_KEY}`);
-    this.setWeatherData(response.data.days);
+    try{
+      const response = await axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${this.state.location}?key=${this.API_KEY}`);
+      this.setWeatherData(response.data.days);
+    } catch(error){
+      console.error("API ERROR: ", error);
+      alert("Something went wrong with the request, please check the console log for details!");
+    }
   }
 
   render(){
