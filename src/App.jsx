@@ -10,17 +10,12 @@ class App extends React.Component{
   
   constructor(props){
     super(props);
-    this.API_KEY = "";
+    this.API_KEY = "VHWGC3G7Y7U5NYHBDGTE7E52D";
     this.debounceTimer = React.createRef();
 
     this.state = {
       location: "",
       weatherData: [
-        {
-          weekDay: "Monday",
-          icon: "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png",
-          temperature: "-3",
-        }
       ]
     }
   }
@@ -39,10 +34,16 @@ class App extends React.Component{
     this.setState({location: value});
   }
 
+  setWeatherData = (value) => {
+    this.setState({weatherData: value});
+  }
+
   async fetchData() {
 
     const response = await axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${this.state.location}?key=${this.API_KEY}`);
     console.log(response);
+    debugger;
+    this.setWeatherData(response.data.days);
   }
 
   render(){
@@ -55,10 +56,8 @@ class App extends React.Component{
             <div className="flex flex-row place-items-center">
               {this.state.weatherData.map((data) => (
                 <WeatherCard
-                  key={data.weekDay + data.icon + data.temperature}
-                  weekDay={data.weekDay}
-                  icon={data.icon}
-                  temperature={data.temperature}
+                  key={data.sunriseEpoch + data.icon + data.temperature}
+                  weatherData={data}
                 />
               ))}
             </div>
