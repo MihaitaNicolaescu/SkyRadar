@@ -7,7 +7,7 @@ import axios from 'axios';
 
 class App extends React.Component{
 
-  API_KEY = "";
+  API_KEY = "YOUR_API_KEY_HERE";
   debounceTimer = React.createRef();
 
   state = {
