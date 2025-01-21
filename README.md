@@ -10,7 +10,7 @@ This is a simple weather application that fetches and displays current weather d
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/SkyRadar.git
+   git clone https://github.com/MihaitaNicolaescu/SkyRadar.git
    ```
 
 2. Navigate to the project directory:
