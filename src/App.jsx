@@ -10,7 +10,7 @@ class App extends React.Component{
   
   constructor(props){
     super(props);
-    this.API_KEY = "VHWGC3G7Y7U5NYHBDGTE7E52D";
+    this.API_KEY = "";
     this.debounceTimer = React.createRef();
 
     this.state = {
@@ -35,14 +35,13 @@ class App extends React.Component{
   }
 
   setWeatherData = (value) => {
-    this.setState({weatherData: value});
+    this.setState({weatherData: value.slice(0,7)});
   }
 
   async fetchData() {
 
     const response = await axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${this.state.location}?key=${this.API_KEY}`);
     console.log(response);
-    debugger;
     this.setWeatherData(response.data.days);
   }
 
