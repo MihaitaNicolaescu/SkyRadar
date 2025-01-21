@@ -41,7 +41,6 @@ class App extends React.Component{
   async fetchData() {
 
     const response = await axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${this.state.location}?key=${this.API_KEY}`);
-    console.log(response);
     this.setWeatherData(response.data.days);
   }
 
@@ -51,6 +50,7 @@ class App extends React.Component{
         <div className="text-center">
           <p className="text-[40px] text-white">SkyRadar</p>
           <Search setLocation={this.setLocation} location={this.state.location}/>
+          {this.state.weatherData.length > 0 && (<p className='text-[20px] mt-5 text-white'>Weather for <strong>{this.state.location}</strong></p>)}
           <div className="grid grid-flow-col place-items-center">
             <div className="flex flex-row place-items-center">
               {this.state.weatherData.map((data) => (
